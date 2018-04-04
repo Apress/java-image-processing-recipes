@@ -1,0 +1,27 @@
+(println "Using OpenCV Version: " opencv3.core/VERSION "..")
+(require '[opencv3.utils :as u])
+(u/show (imread "resources/cat.jpg"))
+(u/show (imread "resources/sunflower.jpg"))
+(u/show (imread "resources/minicat.jpg"))
+(u/show (u/mat-from-url "https://pbs.twimg.com/media/BxxdDwHIcAAiKO7.jpg"))
+(-> "resources/minicat.jpg" imread (cvt-color! COLOR_RGB2GRAY) (u/show))
+("hello" instanceof String) 
+("hello" instance String) 
+(class "hello")
+(= (class "hello") String)
+(class 1)
+(java.awt.Color/decode "FFCCFF")
+(java.awt.Color/decode "#FFCCFF")
+(java.awt.Color/decode "#000000")
+(->>
+  (new-scalar 128.0)
+  (new-mat 3 3 CV_8UC1)
+(dump))
+(ns happy-tomato
+  (:require
+    [opencv3.utils :as u]
+    [opencv3.core :refer :all]))
+(->>
+  (new-scalar 128.0)
+  (new-mat 3 3 CV_8UC1)
+  (dump))

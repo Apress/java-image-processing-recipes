@@ -1,0 +1,77 @@
+(ns thoughtless-crater
+    (:require
+    [opencv3.core :refer :all]
+    [opencv3.utils :as u]))
+(def original
+   (-> "resources/images/cat.jpg" (imread) (u/resize-by 0.15)))
+(-> original clone (pencil-sketch! (new-mat)) u/mat-view)
+(prn (into {} (System/getenv)))
+(clojure.pprint/pprint (into {} (System/getenv)))
+(->
+  (imread "resources/chapter03/adachi.jpg" IMREAD_REDUCED_COLOR_8)
+  (low-high! 17 rgb/lightblue rgb/white)
+  (imwrite "/Users/niko/Desktop/adachiblue.jpg"))
+(ns opencv3.changesomecolors
+ (:require
+  [opencv3.core :refer :all]
+  [opencv3.colors.rgb :as rgb]
+  [opencv3.utils :as u]))
+(->
+   (imread "resources/chapter03/adachi.jpg" IMREAD_REDUCED_COLOR)
+   (low-high! 17 rgb/lightblue rgb/white)
+   (imwrite "/Users/niko/Desktop/adachiblue.jpg"))
+(defn low-high!
+  ([image t1 color1 color2 ]
+    (low-high! image t1 255 THRESH_BINARY color1 t1 255 THRESH_BINARY_INV color2))
+  ([image a1 a2 a3 color1 b1 b2 b3 color2 ]
+  (let [_copy (-> image clone (cvt-color! COLOR_BGR2HSV))
+        _work (clone image)
+        _thresh-1 (new-mat)
+        _thresh-2 (new-mat)]
+    (threshold _copy _thresh-1 a1 a2 a3)
+    (cvt-color! _thresh-1 COLOR_BGR2GRAY)
+    (set-to _work color1 _thresh-1)
+    (threshold _copy _thresh-2 b1 b2 b3)
+    (cvt-color! _thresh-2 COLOR_BGR2GRAY)
+    (set-to _work color2 _thresh-2)
+    _work)))
+    
+(->
+   (imread "resources/chapter03/adachi.jpg" IMREAD_REDUCED_COLOR)
+   (low-high! 17 rgb/lightblue rgb/white)
+   (imwrite "/Users/niko/Desktop/adachiblue.jpg"))
+(->
+   (imread "resources/chapter03/adachi.jpg")
+   (low-high! 17 rgb/lightblue rgb/white)
+   (imwrite "/Users/niko/Desktop/adachiblue.jpg"))
+(import [org.opencv.highgui HighGui])
+(import '[org.opencv.highgui HighGui])
+(import '[org.opencv.highgui Highgui])
+(import '[org.opencv.imgcodecs Imgcodecs])
+(Imgcodes/imread "resources/nico.jpg")
+(Imgcodces/imread "resources/nico.jpg")
+(Imgcodecs/imread "resources/nico.jpg")
+(def nico (Imgcodecs/imread "resources/nico.jpg"))
+(Highgui/imshow "nico" nico)
+nico
+(Highgui/imshownico)
+(Highgui/imshow nico)
+(HighGui/imshow "nico" nico)
+(import '[org.opencv.highgui HighGui])
+(import '[org.opencv.highgui Highgui])
+(require '[clojure.reflect :as r])
+(use '[clojure.pprint :only [print-table]])
+(print-table (:members (r/reflect "foo")))
+(print-table (:members (r/reflect Highgui)))
+(def h (Highgui.))
+(.displayStatusBar h)
+(Highgui.displayStatusBar)
+(require  '[opencv3.utils :as u])
+(u/imshow nico)
+(ns frightened-resonance
+      (:require [cortex.experiment.train :as train]
+            [cortex.nn.execute :as execute]
+            [tutorial :as tut]
+            [cortex.nn.layers :as layers]
+            [cortex.nn.network :as network]
+            :reload))
